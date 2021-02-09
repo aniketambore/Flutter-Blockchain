@@ -17,9 +17,9 @@ You can test it on your local blockchain server via [Ganache](https://www.truffl
 ![](screenshot/Ganache_Add_Project.png)
 - Run `truffle migrate`
 
-|                                                         |                                                      |
-|---------------------------------------------------------|:----------------------------------------------------:|
-|<img src="screenshot/Screenshot_1.png" width="50%" >     | <img src="screenshot/Screenshot_2.png" width="50%" > |  
+|                                                          |                                                      |
+|----------------------------------------------------------|:----------------------------------------------------:|
+| <img src="screenshot/Screenshot_1.png" width="50%" >     | <img src="screenshot/Screenshot_2.png" width="50%" > |  
 
 
 - [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
