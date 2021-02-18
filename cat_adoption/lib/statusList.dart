@@ -56,15 +56,18 @@ class StatusList extends StatelessWidget {
                           //mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
                             Text(
-                              "Owned By :- ",
+                              "Adopted By :- ",
                               style: TextStyle(
                                   fontSize: 20, color: Colors.tealAccent),
                             ),
                             Text(
-                              "${contractLink.allAdopters[index].toString().substring(0, 5)}XXXXX",
+                              "${contractLink.allAdopters[index].toString()}" ==
+                                      "0x0000000000000000000000000000000000000000"
+                                  ? "Not Adopted"
+                                  : "${contractLink.allAdopters[index].toString().substring(0, 5)}XXXXX",
                               style: TextStyle(
                                   fontSize: 20,
-                                  color: Colors.tealAccent,
+                                  color: Colors.orange,
                                   textBaseline: TextBaseline.ideographic),
                             )
                           ],

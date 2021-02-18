@@ -191,6 +191,7 @@ class _HomeState extends State<Home> {
                       child: ElevatedButton(
                           onPressed: () {
                             contractLink.adoptFunc(index, accountAddr.text);
+                            showToast("Thanks For Adopting $catName.", context);
                             Navigator.pop(context);
                           },
                           child: Text("Adopt")),
