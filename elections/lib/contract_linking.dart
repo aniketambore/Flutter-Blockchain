@@ -10,7 +10,7 @@ class ContractLinking extends ChangeNotifier {
   final String _rpcUrl = "http://10.0.2.2:7545";
   final String _wsUrl = "ws://10.0.2.2:7545/";
   final String _privateKey =
-      "1f8aa8f9d7f7ae745e4d58ab5daed17f2d0111e6244131a2f267502a675c9505";
+      "7568b890081b46e07fdb142c77517f0d5fb6b025a7819a1ea4a04d6918067fd6";
 
   Web3Client _client;
   String _abiCode;
@@ -96,7 +96,10 @@ class ContractLinking extends ChangeNotifier {
         Transaction.callContract(
             contract: _contract,
             function: _voteFunc,
-            parameters: [toProposal, EthereumAddress.fromHex(voterAddress)]));
+            parameters: [
+              BigInt.from(toProposal),
+              EthereumAddress.fromHex(voterAddress)
+            ]));
     getChairperson();
   }
 

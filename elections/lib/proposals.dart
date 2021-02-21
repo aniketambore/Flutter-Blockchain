@@ -1,31 +1,36 @@
+import 'package:elections/contract_linking.dart';
+import 'package:elections/election.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:provider/provider.dart';
+
+List catsNames = [
+  "Ballerina",
+  "Orangetabby",
+  "Rascal",
+  "Siamese",
+  "Smudge",
+];
+
+List assetsImages = [
+  "assets/images/ballerina-portrait-idle.png",
+  "assets/images/orangetabby-portrait-idle.png",
+  "assets/images/rascal-portrait-idle.png",
+  "assets/images/siamese-portrait-idle.png",
+  "assets/images/smudge-portrait-idle.png",
+];
 
 class Proposals extends StatelessWidget {
-  List assetsImages = [
-    "assets/images/ballerina-portrait-idle.png",
-    "assets/images/orangetabby-portrait-idle.png",
-    "assets/images/rascal-portrait-idle.png",
-    "assets/images/siamese-portrait-idle.png",
-    "assets/images/smudge-portrait-idle.png",
-  ];
-
-  List catsNames = [
-    "Ballerina",
-    "Orangetabby",
-    "Rascal",
-    "Siamese",
-    "Smudge",
-  ];
-
   @override
   Widget build(BuildContext context) {
+    var contractLink = Provider.of<ContractLinking>(context);
     return Scaffold(
       appBar: AppBar(
         title: Text("Election On Blockchain"),
       ),
       body: Container(
         child: ListView.builder(
-          // itemCount: contractLink.allAdopters.length,
           itemCount: 4,
           itemBuilder: (context, int index) {
             return Stack(
@@ -44,34 +49,20 @@ class Proposals extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
-                          Flexible(
-                            child: Text(
-                              "Name - ${catsNames[index]}",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 25,
-                                  textBaseline: TextBaseline.ideographic),
-                            ),
+                          Text(
+                            "Name - ${catsNames[index]}",
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 25,
+                                textBaseline: TextBaseline.ideographic),
                           ),
-                          Row(
-                            //mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              Text(
-                                "Adopted By :- ",
-                                style: TextStyle(
-                                    fontSize: 20, color: Colors.tealAccent),
-                              ),
-//                            Text(
-//                              "${contractLink.allAdopters[index].toString()}" ==
-//                                  "0x0000000000000000000000000000000000000000"
-//                                  ? "Not Adopted"
-//                                  : "${contractLink.allAdopters[index].toString().substring(0, 5)}XXXXX",
-//                              style: TextStyle(
-//                                  fontSize: 20,
-//                                  color: Colors.orange,
-//                                  textBaseline: TextBaseline.ideographic),
-//                            )
-                            ],
+                          ElevatedButton(
+                            child: Text("Vote"),
+                            style:
+                                ElevatedButton.styleFrom(primary: Colors.cyan),
+                            onPressed: () {
+                              voteProposal(context, index);
+                            },
                           )
                         ],
                       ),
@@ -108,6 +99,74 @@ class Proposals extends StatelessWidget {
           },
         ),
       ),
+    );
+  }
+
+  voteProposal(context, int toProposal) {
+    var contractLink = Provider.of<ContractLinking>(context, listen: false);
+    TextEditingController voterAddress = TextEditingController();
+    showDialog(
+        context: context,
+        builder: (_) {
+          return AlertDialog(
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  "Vote Proposal",
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(top: 18, bottom: 8.0),
+                  child: TextField(
+                    controller: voterAddress,
+                    decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10)),
+                        labelText: "Voter Address",
+                        hintText: "Enter Voter Address..."),
+                  ),
+                ),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    ElevatedButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        child: Text("Cancel")),
+                    Padding(
+                      padding: EdgeInsets.only(left: 8.0),
+                      child: ElevatedButton(
+                          onPressed: () {
+                            contractLink.vote(toProposal, voterAddress.text);
+                            showToast("Thanks for voting !", context);
+                            //Navigator.pop(context);
+                            Navigator.pushAndRemoveUntil(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => ElectionUI()),
+                                (route) => false);
+                          },
+                          child: Text("VOTE")),
+                    )
+                  ],
+                )
+              ],
+            ),
+          );
+        });
+  }
+
+  showToast(String message, BuildContext context) {
+    Fluttertoast.showToast(
+      msg: message,
+      backgroundColor: Colors.teal,
+      toastLength: Toast.LENGTH_SHORT,
+      gravity: ToastGravity.TOP,
+      textColor: Colors.white,
+      fontSize: 20,
     );
   }
 }

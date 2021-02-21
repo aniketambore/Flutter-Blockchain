@@ -1,12 +1,32 @@
-# elections
+# Elections On Blockchain (Flutter + Blockchain)
+## Project 6
 
-A new Flutter project.
+A basic blockchain and flutter based project.
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+```
+📁 elections
+    📁 lib
+        🎯 contract_linking.dart
+          - Update _rpcUrl, _wsUrl, _privateKey as per your needs.
+```
 
-A few resources to get you started if this is your first Flutter project:
+You can test it on your local blockchain server via [Ganache](https://www.trufflesuite.com/ganache).
+- Add the project in Ganache.
+- Run `truffle migrate`
+
+|                                                          |                                                      |
+|----------------------------------------------------------|:----------------------------------------------------:|
+| <img src="screenshots/Screenshot_1.png" width="50%" >     | <img src="screenshots/Screenshot_2.png" width="50%" > |  
+
+|                                                          |                                                      |
+|----------------------------------------------------------|:----------------------------------------------------:|
+| <img src="screenshots/Screenshot_3.png" width="50%" >     | <img src="screenshots/Screenshot_4.png" width="50%" > | 
+
+|                                                                                                               |
+|----------------------------------------------------------
+| <img src="screenshots/Screenshot_5.png" width="50%" >     
 
 - [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
 - [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)

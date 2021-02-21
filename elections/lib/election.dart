@@ -49,7 +49,7 @@ class ElectionUI extends StatelessWidget {
                             fontWeight: FontWeight.bold, fontSize: 30),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(top: 18.0),
+                        padding: const EdgeInsets.only(top: 18.0, bottom: 8.0),
                         child: Container(
                             width: MediaQuery.of(context).size.width / 2,
                             height: 50,
@@ -62,7 +62,7 @@ class ElectionUI extends StatelessWidget {
                             )),
                       ),
                       Padding(
-                        padding: const EdgeInsets.all(8.0),
+                        padding: EdgeInsets.only(bottom: 8.0),
                         child: Container(
                             width: MediaQuery.of(context).size.width / 2,
                             height: 50,
@@ -76,7 +76,21 @@ class ElectionUI extends StatelessWidget {
                               label: Text("Vote"),
                               icon: Icon(Icons.how_to_vote),
                             )),
-                      )
+                      ),
+                      Container(
+                          width: MediaQuery.of(context).size.width / 2,
+                          height: 50,
+                          child: ElevatedButton.icon(
+                            onPressed: () async {
+                              String winnerIs = await contractLink.winner();
+                              displayWinner(
+                                  context,
+                                  catsNames[int.parse(winnerIs)],
+                                  assetsImages[int.parse(winnerIs)]);
+                            },
+                            label: Text("Display Winner"),
+                            icon: Icon(Icons.card_giftcard),
+                          )),
                     ],
                   ),
                 ),
@@ -153,6 +167,30 @@ class ElectionUI extends StatelessWidget {
                     )
                   ],
                 )
+              ],
+            ),
+          );
+        });
+  }
+
+  displayWinner(context, winnerIs, image) {
+    showDialog(
+        context: context,
+        builder: (_) {
+          return AlertDialog(
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  "Winner Is $winnerIs",
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
+                ),
+                Image(image: AssetImage(image)),
+                ElevatedButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: Text("Cancel"))
               ],
             ),
           );
