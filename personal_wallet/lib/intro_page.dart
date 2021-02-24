@@ -16,7 +16,7 @@ class IntroPage extends StatelessWidget {
                 ElevatedButton(
                   child: Text("Create new wallet"),
                   onPressed: () {
-                    //Navigator.of(context).pushNamed("/create");
+                    Navigator.of(context).pushNamed("/create");
                   },
                 ),
                 Container(

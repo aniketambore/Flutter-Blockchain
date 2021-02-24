@@ -42,6 +42,12 @@ dependencies:
 
   tweetnacl: ^0.3.2
   hex: ^0.1.2
+  flutter_hooks: ^0.15.0
+
+  built_value: ^7.1.0
+  built_collection: ^4.3.2
+
+  url_launcher: ^5.7.10
 
 dev_dependencies:
   flutter_test:
