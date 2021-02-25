@@ -21,7 +21,8 @@ Future<List<SingleChildWidget>> createProviders(AppConfigParams params) async {
   final addressService = AddressService(configurationService);
   //final contract = ContractParser.fromAssets(params.contractAddress);
 
-  final contractService = ContractService(client);
+  //final contractService = ContractService(client);
+  final contractService = ContractService();
 
   return [
     Provider.value(value: addressService),

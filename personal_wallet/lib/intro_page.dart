@@ -24,7 +24,7 @@ class IntroPage extends StatelessWidget {
                   child: OutlinedButton(
                     child: Text("Import wallet"),
                     onPressed: () {
-                      //Navigator.of(context).pushNamed("/import");
+                      Navigator.of(context).pushNamed("/import");
                     },
                   ),
                 )

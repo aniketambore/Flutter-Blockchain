@@ -4,15 +4,13 @@ import 'package:web3dart/contracts.dart';
 import 'package:web3dart/credentials.dart';
 
 class ContractParser {
-  static Future fromAssets(String contractAddress) async {
-//    final contractJson =
-//    jsonDecode(await rootBundle.loadString('assets/PersonalCoin.json'));
+  static Future<DeployedContract> fromAssets(String contractAddress) async {
+    final contractJson =
+        jsonDecode(await rootBundle.loadString('assets/TargaryenCoin.json'));
 
-    final artifactsStringFile = jsonDecode(
-        await rootBundle.loadString("src/artifacts/PersonalCoin.json"));
-    String _abiCode = jsonEncode(artifactsStringFile["abi"]);
-
-    return DeployedContract(ContractAbi.fromJson(_abiCode, "PersonalCoin"),
+    return DeployedContract(
+        ContractAbi.fromJson(
+            jsonEncode(contractJson["abi"]), contractJson["contractName"]),
         EthereumAddress.fromHex(contractAddress));
   }
 }
