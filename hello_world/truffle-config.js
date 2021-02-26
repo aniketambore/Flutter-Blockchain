@@ -5,14 +5,11 @@ module.exports = {
       port: 7545,            // Standard Ethereum port (default: none)
       network_id: "*",       // Any network (default: none)
      },
-     advanced: {     // Account to send txs from (default: accounts[0])
-     websockets: true        // Enable EventEmitter interface for web3 (default: false)
-     },
    },
-    contracts_build_directory: "./src/abis/",
+    contracts_build_directory: "./src/artifacts/",
   // Configure your compilers
   compilers: {
-    solc: {     // Use "0.5.1" you've installed locally with docker (default: false)     // See the solidity docs for advice about optimization and evmVersion
+    solc: {
         optimizer: {
           enabled: true,
           runs: 200

@@ -12,10 +12,11 @@ A basic blockchain and flutter based project.
           - Update _rpcUrl, _wsUrl, _privateKey as per your needs.
 ```
 
-You can test it on your local blockchain server via [Ganache](https://www.trufflesuite.com/ganache).
-- Add the project in Ganache.
-![](screenshot/Ganache_Add_Project.png)
-- Run `truffle migrate`
+- Open Ganache Test Network
+- Run `truffle migrate --reset`
+- Paste the `private key` of first account to **contract_linking.dart**
+ ![FLutter + Blockchain](screenshot/Ganache_Add_Private_Key.png)
+- Run the project
 
 |                                                          |                                                      |
 |----------------------------------------------------------|:----------------------------------------------------:|
