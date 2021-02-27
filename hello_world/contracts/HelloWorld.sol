@@ -1,6 +1,6 @@
 pragma solidity^0.5.9 ;
 
-contract Hello{
+contract HelloWorld{
     string public yourName ;
 
     constructor() public{

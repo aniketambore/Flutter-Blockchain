@@ -11,7 +11,7 @@ class ContractLinking extends ChangeNotifier {
   final String _rpcUrl = "http://10.0.2.2:7545";
   final String _wsUrl = "ws://10.0.2.2:7545/";
   final String _privateKey =
-      "8fb6da679f3c35af31ca0d5f9238df059d755fb5a51391af04a7d398db8965a1";
+      "86b9c2b3f5fb0a237353e406836424eccefe6aea1d62549207dc39e5bef143b2";
   Web3Client _client;
   bool isLoading = true;
 
@@ -42,7 +42,7 @@ class ContractLinking extends ChangeNotifier {
 
   Future<void> getAbi() async {
     String abiStringFile =
-        await rootBundle.loadString("src/artifacts/Hello.json");
+        await rootBundle.loadString("src/artifacts/HelloWorld.json");
     var jsonAbi = jsonDecode(abiStringFile);
     _abiCode = jsonEncode(jsonAbi["abi"]);
     _contractAddress =
@@ -56,7 +56,7 @@ class ContractLinking extends ChangeNotifier {
 
   Future<void> getDeployedContract() async {
     _contract = DeployedContract(
-        ContractAbi.fromJson(_abiCode, "Hello"), _contractAddress);
+        ContractAbi.fromJson(_abiCode, "HelloWorld"), _contractAddress);
     _yourName = _contract.function("yourName");
     _setName = _contract.function("setName");
     getName();
