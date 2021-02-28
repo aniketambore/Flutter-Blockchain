@@ -83,9 +83,13 @@ class DisplayPopulation extends StatelessWidget {
                                   ),
                                   ElevatedButton.icon(
                                     onPressed: () {
-                                      contractLink.currentPopulation == "0"
-                                          ? null
-                                          : dialog(context, "Decrease");
+                                      if (contractLink.currentPopulation !=
+                                          "0") {
+                                        dialog(context, "Decrease");
+                                      }
+//                                      contractLink.currentPopulation == "0"
+//                                          ? null
+//                                          : dialog(context, "Decrease");
                                     },
                                     icon: Icon(Icons.person_remove_alt_1,
                                         size: 18),

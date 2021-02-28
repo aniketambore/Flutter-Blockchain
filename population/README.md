@@ -13,8 +13,7 @@ A basic blockchain and flutter based project.
 ```
 
 You can test it on your local blockchain server via [Ganache](https://www.trufflesuite.com/ganache).
-- Add the project in Ganache.
-- Run `truffle migrate`
+- Run `truffle migrate --reset`
 
 ![Population On Blockchain](screenshot/population.gif)
 

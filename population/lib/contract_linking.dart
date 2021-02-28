@@ -10,14 +10,13 @@ class ContractLinking extends ChangeNotifier {
   final String _rpcUrl = "http://10.0.2.2:7545";
   final String _wsUrl = "ws://10.0.2.2:7545/";
   final String _privateKey =
-      "8a31ac5fd91fd686dc414bc2d33e8fa9ea6007d565a06ac395e920b688969f76";
+      "d920aadc0de9756030c92c607c9ab00a1f40c81890f996381b18d112d7c6ec13";
 
   Web3Client _client;
   String _abiCode;
 
   EthereumAddress _contractAddress;
   Credentials _credentials;
-  EthereumAddress _ownAddress;
 
   DeployedContract _contract;
   ContractFunction _countryName;
@@ -35,7 +34,7 @@ class ContractLinking extends ChangeNotifier {
   }
 
   initialSetup() async {
-    _client = await Web3Client(_rpcUrl, Client(), socketConnector: () {
+    _client = Web3Client(_rpcUrl, Client(), socketConnector: () {
       return IOWebSocketChannel.connect(_wsUrl).cast<String>();
     });
     await getAbi();
@@ -54,7 +53,6 @@ class ContractLinking extends ChangeNotifier {
 
   Future<void> getCredentials() async {
     _credentials = await _client.credentialsFromPrivateKey(_privateKey);
-    _ownAddress = await _credentials.extractAddress();
   }
 
   Future<void> getDeployedContract() async {
