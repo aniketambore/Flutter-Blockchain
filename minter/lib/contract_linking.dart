@@ -16,7 +16,6 @@ class ContractLinking extends ChangeNotifier {
   String _abiCode;
 
   EthereumAddress _contractAddress;
-  EthereumAddress _ownAddress;
   Credentials _credentials;
 
   DeployedContract _contract;
@@ -52,7 +51,6 @@ class ContractLinking extends ChangeNotifier {
 
   Future<void> getCredentials() async {
     _credentials = await _client.credentialsFromPrivateKey(_privateKey);
-    _ownAddress = await _credentials.extractAddress();
   }
 
   Future<void> getDeployedContract() async {
