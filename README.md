@@ -109,19 +109,19 @@ You should see output similar to the following:
 
 ## DAPPS
 
-Hello World Dapp                                                          |   Population Dapp                         |
-:------------------------------------------------------------------------:|:-----------------------------------------:|
-<img src="hello_world/screenshot/Screenshot_1.png?raw=true" width="40%"/> |  ![](population/screenshot/population.gif)|
+Hello World Dapp                                                            |   Population Dapp                                                        |
+:--------------------------------------------------------------------------:|:------------------------------------------------------------------------:|
+<img src="hello_world/screenshot/Screenshot_1.png?raw=true" width="340px"/> |  <img src="population/screenshot/population.gif?raw=true" width="340px"/>|
 
 
-Bidder                             |  Minter                             | 
-:---------------------------------:|:-----------------------------------:|
-![](bidder/screenshot/bidder.gif)  |  ![](minter/Screenshot/minter.gif)  |
+Bidder                                                           |  Minter                                                          | 
+:---------------------------------------------------------------:|:----------------------------------------------------------------:|
+<img src="bidder/screenshot/bidder.gif?raw=true" width="340px"/> | <img src="minter/Screenshot/minter.gif?raw=true" width="340px"/> |
 
 
-Cat Adoption                                 |  Election        |
-:-------------------------------------------:|:-----------------------------------:|
-![](cat_adoption/screenshot/catAdoption.gif) | <img src="elections/screenshots/Screenshot_1.png?raw=true" width="340px"/> |
+Cat Adoption                                                                |  Election        |
+:--------------------------------------------------------------------------:|:-----------------------------------:|
+<img src="cat_adoption/screenshot/catAdoption.gif?raw=true" width="340px"/> | <img src="elections/screenshots/Screenshot_1.png?raw=true" width="340px"/> |
 
 ## Tutorials
 
