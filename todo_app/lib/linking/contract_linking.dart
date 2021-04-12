@@ -11,10 +11,10 @@ class ContractLinking extends ChangeNotifier {
   int taskCount = 0;
   bool isLoading = true;
 
-  final String _rpcUrl = "http://10.0.2.2:7545";
-  final String _wsUrl = "ws://10.0.2.2:7545/";
+  final String _rpcUrl = "http://127.0.0.1:7545";
+  final String _wsUrl = "ws://127.0.0.1:7545/";
   final String _privateKey =
-      "a84c7a27f1715e42c85f9e9b7195a337154bc561e93c6127e17a49f8ed74aeef";
+      "ea77ba3f64920aa24e484a96c6c77b9206d010e0ec07733446235d746a18ffd8";
 
   Web3Client _client;
 
