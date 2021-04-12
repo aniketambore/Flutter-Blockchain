@@ -121,7 +121,7 @@ Bidder                             |  Minter                             |
 
 Cat Adoption                                 |  Election        |
 :-------------------------------------------:|:-----------------------------------:|
-![](cat_adoption/screenshot/catAdoption.gif) | <img src="elections/screenshots/Screenshot_1.png?raw=true" width="406px"/> |
+![](cat_adoption/screenshot/catAdoption.gif) | <img src="elections/screenshots/Screenshot_1.png?raw=true" width="340px"/> |
 
 ## Tutorials
 
