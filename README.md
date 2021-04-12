@@ -19,9 +19,10 @@
 
 - [Setting up the development environment](#setting-up-the-development-environment)
 - [Directory Structure](#directory-structure)
-- [Compiling and Migrating Smart Contract](#compiling-smart-contract)
+- [Compiling and Migrating Smart Contract](#compiling-and-migrating-smart-contract)
 - [Testing the Smart Contract](#testing-the-smart-contract)
 - [Contract Linking](#contract-linking)
+- [DAPPS](#dapps)
 - [Tutorials](#tutorials)
 - [Contributing](#contributing)
 
@@ -38,7 +39,7 @@ We will also be using [**Ganache**](http://truffleframework.com/ganache), a pers
 ## Directory Structure
 
 <div align="center">
-    <img src="README_Images/directory_structure.png?raw=true" width="70%" alt="Directory Structure"/>
+    <img src="README_Images/directory_structure.png?raw=true" width="50%" alt="Directory Structure"/>
 </div>
 
 - **contracts/** : Contains solidity contract file.
@@ -105,6 +106,22 @@ You should see output similar to the following:
 </div>
 
 - After Contract Linking, Just run the Flutter Project.
+
+## DAPPS
+
+Hello World Dapp                                                          |   Population Dapp                         |
+:------------------------------------------------------------------------:|:-----------------------------------------:|
+<img src="hello_world/screenshot/Screenshot_1.png?raw=true" width="40%"/> |  ![](population/screenshot/population.gif)|
+
+
+Bidder                             |  Minter                             | 
+:---------------------------------:|:-----------------------------------:|
+![](bidder/screenshot/bidder.gif)  |  ![](minter/Screenshot/minter.gif)  |
+
+
+Cat Adoption                                 |  Election        |
+:-------------------------------------------:|:-----------------------------------:|
+![](cat_adoption/screenshot/catAdoption.gif) |  ![](elections/screenshots/Screenshot_1.png) <img src="elections/screenshots/Screenshot_1.png?raw=true" width="406px"/> |
 
 ## Tutorials
 
