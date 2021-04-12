@@ -138,6 +138,6 @@ Cat Adoption                                                                |  E
  - Submit a pull request.
 
 
-Show some ❤ and star the repo to support the project
+<h3 align="center">Show some ❤ and star the repo to support the project</h3>
 
 
