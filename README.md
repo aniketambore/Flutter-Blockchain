@@ -111,17 +111,17 @@ You should see output similar to the following:
 
 Hello World Dapp                                                            |   Population Dapp                                                        |
 :--------------------------------------------------------------------------:|:------------------------------------------------------------------------:|
-<img src="hello_world/screenshot/Screenshot_1.png?raw=true" width="340px"/> |  <img src="population/screenshot/population.gif?raw=true" width="340px"/>|
+<img src="hello_world/screenshot/Screenshot_1.png?raw=true" width="340px"/> |  <img src="population/screenshot/population.gif?raw=true" width="320px"/>|
 
 
 Bidder                                                           |  Minter                                                          | 
 :---------------------------------------------------------------:|:----------------------------------------------------------------:|
-<img src="bidder/screenshot/bidder.gif?raw=true" width="340px"/> | <img src="minter/Screenshot/minter.gif?raw=true" width="340px"/> |
+<img src="bidder/screenshot/bidder.gif?raw=true" width="280px"/> | <img src="minter/Screenshot/minter.gif?raw=true" width="340px"/> |
 
 
 Cat Adoption                                                                |  Election        |
 :--------------------------------------------------------------------------:|:-----------------------------------:|
-<img src="cat_adoption/screenshot/catAdoption.gif?raw=true" width="340px"/> | <img src="elections/screenshots/Screenshot_1.png?raw=true" width="340px"/> |
+<img src="cat_adoption/screenshot/catAdoption.gif?raw=true" width="340px"/> | <img src="elections/screenshots/Screenshot_1.png?raw=true" width="300px"/> |
 
 ## Tutorials
 
