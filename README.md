@@ -39,7 +39,7 @@ We will also be using [**Ganache**](http://truffleframework.com/ganache), a pers
 ## Directory Structure
 
 <div align="center">
-    <img src="README_Images/directory_structure.png?raw=true" width="50%" alt="Directory Structure"/>
+    <img src="README_Images/directory_structure.png?raw=true" width="30%" alt="Directory Structure"/>
 </div>
 
 - **contracts/** : Contains solidity contract file.
@@ -121,7 +121,7 @@ Bidder                             |  Minter                             |
 
 Cat Adoption                                 |  Election        |
 :-------------------------------------------:|:-----------------------------------:|
-![](cat_adoption/screenshot/catAdoption.gif) |  ![](elections/screenshots/Screenshot_1.png) <img src="elections/screenshots/Screenshot_1.png?raw=true" width="406px"/> |
+![](cat_adoption/screenshot/catAdoption.gif) | <img src="elections/screenshots/Screenshot_1.png?raw=true" width="406px"/> |
 
 ## Tutorials
 
