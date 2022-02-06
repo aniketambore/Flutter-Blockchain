@@ -12,4 +12,4 @@ A basic blockchain and flutter based project.
 
 ---
 
-For tutorial of Hello World Dapp check [https://www.geeksforgeeks.org/flutter-and-blockchain-hello-world-dapp/?ref=feed](https://www.geeksforgeeks.org/flutter-and-blockchain-hello-world-dapp/?ref=feed)
+For tutorial of Hello World Dapp check [https://aniketambore.netlify.app/Developement/hello_world_dapp/](https://aniketambore.netlify.app/Developement/hello_world_dapp/)
