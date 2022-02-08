@@ -18,13 +18,13 @@ contract("Bidder" , () => {
     });
 
     it("Setting the Bidder - Negative" ,async () => {
-            await bidder.setBidder("Aniket" , 4999) ;
+            await bidder.setBidder("Aniket" , 999) ;
             const name = await bidder.bidderName() ;
             const amount = await bidder.bidAmount();
             const eligible = await bidder.displayEligibility() ;
 
             assert(name === "Aniket");
-            assert(amount.toNumber() === 4999);
+            assert(amount.toNumber() === 999);
             assert(eligible === false) ;
         });
 });

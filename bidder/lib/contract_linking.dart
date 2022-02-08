@@ -1,69 +1,71 @@
 import 'dart:convert';
 
+import 'package:dart_web3/dart_web3.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart';
-import 'package:web3dart/web3dart.dart';
 import 'package:web_socket_channel/io.dart';
 
 class ContractLinking extends ChangeNotifier {
   final String _rpcUrl = "http://10.0.2.2:7545";
   final String _wsUrl = "ws://10.0.2.2:7545/";
   final String _privateKey =
-      "6c03184a66a3602743ec66c4bb83561ea3b2a4b588d720d6203a69112ee41f35";
+      "3571cbb8b18bc0aa01d11f8ea87ddfad88dce216762324c12cc68de7ba4a4cb0";
 
-  Web3Client _client;
-  String _abiCode;
+  late Web3Client _client;
+  late String _abiCode;
 
-  EthereumAddress _contractAddress;
-  EthereumAddress _ownAddress;
-  Credentials _credentials;
+  late EthereumAddress _contractAddress;
+  late Credentials _credentials;
 
-  DeployedContract _contract;
-  ContractFunction _bidderName;
-  ContractFunction _bidAmount;
-  ContractFunction _minAmount;
-  ContractFunction _setBidder;
-  ContractFunction _displayEligibility;
+  late DeployedContract _contract;
+  late ContractFunction _bidderName;
+  late ContractFunction _bidAmount;
+  late ContractFunction _minBidAmount;
+  late ContractFunction _setBidder;
+  late ContractFunction _displayEligibility;
 
   bool isLoading = true;
-  String bidderName;
-  BigInt bidAmount;
-  BigInt minAmount;
-  bool displayEligibility;
+  String? bidderName;
+  BigInt? bidAmount;
+  BigInt? minAmount;
+  bool? displayEligibility;
 
   ContractLinking() {
-    initialSetup();
+    initialSetUp();
   }
 
-  initialSetup() async {
-    _client = await Web3Client(_rpcUrl, Client(), socketConnector: () {
+  initialSetUp() async {
+    _client = Web3Client(_rpcUrl, Client(), socketConnector: () {
       return IOWebSocketChannel.connect(_wsUrl).cast<String>();
     });
     await getAbi();
-    await getCredentials();
+    getCredentials();
     await getDeployedContract();
   }
 
   Future<void> getAbi() async {
-    String abiStringFile = await rootBundle.loadString("src/abis/Bidder.json");
+    String abiStringFile =
+        await rootBundle.loadString("src/artifacts/Bidder.json");
     var jsonAbi = jsonDecode(abiStringFile);
     _abiCode = jsonEncode(jsonAbi["abi"]);
+    // print(_abiCode);
     _contractAddress =
         EthereumAddress.fromHex(jsonAbi["networks"]["5777"]["address"]);
   }
 
-  Future<void> getCredentials() async {
-    _credentials = await _client.credentialsFromPrivateKey(_privateKey);
-    _ownAddress = await _credentials.extractAddress();
+  void getCredentials() {
+    _credentials = EthPrivateKey.fromHex(_privateKey);
+    // print(_credentials);
   }
 
   Future<void> getDeployedContract() async {
     _contract = DeployedContract(
         ContractAbi.fromJson(_abiCode, "Bidder"), _contractAddress);
+
     _bidderName = _contract.function("bidderName");
     _bidAmount = _contract.function("bidAmount");
-    _minAmount = _contract.function("minBid");
+    _minBidAmount = _contract.function("minBidAmount");
     _setBidder = _contract.function("setBidder");
     _displayEligibility = _contract.function("displayEligibility");
     getBidderData();
@@ -75,7 +77,7 @@ class ContractLinking extends ChangeNotifier {
     List amount = await _client
         .call(contract: _contract, function: _bidAmount, params: []);
     List min = await _client
-        .call(contract: _contract, function: _minAmount, params: []);
+        .call(contract: _contract, function: _minBidAmount, params: []);
     List eligibility = await _client
         .call(contract: _contract, function: _displayEligibility, params: []);
 
@@ -84,7 +86,7 @@ class ContractLinking extends ChangeNotifier {
     minAmount = min[0];
     displayEligibility = eligibility[0];
 
-    print("${minAmount}");
+    // print("${minAmount}");
     isLoading = false;
     notifyListeners();
   }
