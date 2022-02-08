@@ -1,58 +1,61 @@
 import 'dart:convert';
 
+import 'package:dart_web3/dart_web3.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart';
-import 'package:web3dart/web3dart.dart';
 import 'package:web_socket_channel/io.dart';
 
 class ContractLinking extends ChangeNotifier {
   final String _rpcUrl = "http://10.0.2.2:7545";
   final String _wsUrl = "ws://10.0.2.2:7545/";
   final String _privateKey =
-      "b944115ce684af2ee457637c9a8cc2e4c5cd9f50f13792eddf6615bfd1b9fb21";
+      "97f008aa845cc5785a54e14a85bfb551cd1f4f64fe401ded6ddb3cc4a68c85b6";
 
-  Web3Client _client;
-  String _abiCode;
+  late Web3Client _client;
+  late String _abiCode;
 
-  EthereumAddress _contractAddress;
-  Credentials _credentials;
+  late EthereumAddress _contractAddress;
+  late Credentials _credentials;
 
-  DeployedContract _contract;
-  ContractFunction _countryName;
-  ContractFunction _currentPopulation;
-  ContractFunction _set;
-  ContractFunction _decrement;
-  ContractFunction _increment;
+  late DeployedContract _contract;
+  late ContractFunction _countryName;
+  late ContractFunction _currentPopulation;
+  late ContractFunction _set;
+  late ContractFunction _decrement;
+  late ContractFunction _increment;
 
   bool isLoading = true;
-  String countryName;
-  String currentPopulation;
+  late String countryName;
+  late String currentPopulation;
 
   ContractLinking() {
-    initialSetup();
+    initialSetUp();
   }
 
-  initialSetup() async {
+  initialSetUp() async {
     _client = Web3Client(_rpcUrl, Client(), socketConnector: () {
       return IOWebSocketChannel.connect(_wsUrl).cast<String>();
     });
+    getCredentials();
     await getAbi();
-    await getCredentials();
     await getDeployedContract();
   }
 
-  Future<void> getAbi() async {
-    final abiStringFile =
-        await rootBundle.loadString("src/artifacts/Population.json");
-    final jsonAbi = jsonDecode(abiStringFile);
-    _abiCode = jsonEncode(jsonAbi["abi"]);
-    _contractAddress =
-        EthereumAddress.fromHex(jsonAbi["networks"]["5777"]["address"]);
+  getCredentials() {
+    _credentials = EthPrivateKey.fromHex(_privateKey);
   }
 
-  Future<void> getCredentials() async {
-    _credentials = await _client.credentialsFromPrivateKey(_privateKey);
+  Future<void> getAbi() async {
+    String abiStringFile =
+        await rootBundle.loadString("src/artifacts/Population.json");
+    var jsonAbi = jsonDecode(abiStringFile);
+    _abiCode = jsonEncode(jsonAbi["abi"]);
+    // print(_abiCode);
+
+    _contractAddress =
+        EthereumAddress.fromHex(jsonAbi["networks"]["5777"]["address"]);
+    print(_contractAddress);
   }
 
   Future<void> getDeployedContract() async {
@@ -63,7 +66,6 @@ class ContractLinking extends ChangeNotifier {
     _set = _contract.function("set");
     _decrement = _contract.function("decrement");
     _increment = _contract.function("increment");
-
     getData();
   }
 
@@ -79,15 +81,13 @@ class ContractLinking extends ChangeNotifier {
     notifyListeners();
   }
 
-  addData(String nameData, BigInt countData) async {
+  setData(String name, BigInt count) async {
     isLoading = true;
     notifyListeners();
     await _client.sendTransaction(
         _credentials,
         Transaction.callContract(
-            contract: _contract,
-            function: _set,
-            parameters: [nameData, countData]));
+            contract: _contract, function: _set, parameters: [name, count]));
     getData();
   }
 

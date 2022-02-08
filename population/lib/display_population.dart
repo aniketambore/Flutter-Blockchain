@@ -1,43 +1,45 @@
-import 'package:country_pickers/utils/utils.dart';
 import 'package:flutter/material.dart';
-import 'package:population/setPopulation.dart';
-import 'package:provider/provider.dart';
 import 'package:population/contract_linking.dart';
+import 'package:population/set_population.dart';
+import 'package:provider/provider.dart';
+import 'package:country_pickers/country_pickers.dart';
 
 class DisplayPopulation extends StatelessWidget {
+  const DisplayPopulation({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    final contractLink = Provider.of<ContractLinking>(context);
+    var contractLink = Provider.of<ContractLinking>(context);
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("Population On Blockchain"),
+        title: const Text("Population On Blockchain"),
         centerTitle: true,
       ),
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.edit),
+        child: const Icon(Icons.edit),
         onPressed: () {
           Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (context) => SetPopulation(),
+                  builder: (context) => const SetPopulation(),
                   fullscreenDialog: true));
         },
       ),
       body: Container(
-        padding: EdgeInsets.symmetric(horizontal: 20),
+        padding: const EdgeInsets.symmetric(horizontal: 20),
         child: Center(
           child: contractLink.isLoading
-              ? CircularProgressIndicator()
+              ? const CircularProgressIndicator()
               : SingleChildScrollView(
                   child: Column(
                     children: [
                       contractLink.countryName == "Unknown"
-                          ? Icon(
+                          ? const Icon(
                               Icons.error,
                               size: 100,
                             )
-                          : Container(
+                          : SizedBox(
                               child: CountryPickerUtils.getDefaultFlagImage(
                                   CountryPickerUtils.getCountryByIsoCode(
                                       contractLink.countryName)),
@@ -58,13 +60,11 @@ class DisplayPopulation extends StatelessWidget {
                         padding: const EdgeInsets.all(8.0),
                         child: Text(
                             "Population - ${contractLink.currentPopulation}",
-                            style: TextStyle(
-                                fontSize: 25,
-                                fontWeight: FontWeight.bold,
-                                color: Theme.of(context).primaryColor)),
+                            style: const TextStyle(
+                                fontSize: 25, fontWeight: FontWeight.bold)),
                       ),
                       contractLink.countryName == "Unknown"
-                          ? Text("")
+                          ? const Text("")
                           : Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: Row(
@@ -74,11 +74,11 @@ class DisplayPopulation extends StatelessWidget {
                                     onPressed: () {
                                       dialog(context, "Increase");
                                     },
-                                    icon:
-                                        Icon(Icons.person_add_alt_1, size: 18),
-                                    label: Text("Increase"),
+                                    icon: const Icon(Icons.person_add_alt_1,
+                                        size: 18),
+                                    label: const Text("Increase"),
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     width: 15,
                                   ),
                                   ElevatedButton.icon(
@@ -91,9 +91,9 @@ class DisplayPopulation extends StatelessWidget {
 //                                          ? null
 //                                          : dialog(context, "Decrease");
                                     },
-                                    icon: Icon(Icons.person_remove_alt_1,
+                                    icon: const Icon(Icons.person_remove_alt_1,
                                         size: 18),
-                                    label: Text("Decrease"),
+                                    label: const Text("Decrease"),
                                   )
                                 ],
                               ),
@@ -113,8 +113,8 @@ class DisplayPopulation extends StatelessWidget {
         context: context,
         builder: (_) => AlertDialog(
               title: method == "Increase"
-                  ? Text("Increase Population")
-                  : Text("Decrease Population"),
+                  ? const Text("Increase Population")
+                  : const Text("Decrease Population"),
               content: Column(
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -122,12 +122,12 @@ class DisplayPopulation extends StatelessWidget {
                   Text(
                       "Current Population is ${contractLink.currentPopulation}"),
                   Padding(
-                    padding: EdgeInsets.only(top: 20.0),
+                    padding: const EdgeInsets.only(top: 20.0),
                     child: TextField(
                       controller: countController,
                       keyboardType: TextInputType.number,
                       decoration: InputDecoration(
-                        border: OutlineInputBorder(),
+                        border: const OutlineInputBorder(),
                         hintText: method == "Increase"
                             ? "Increase Population By ..."
                             : "Decrease Population By ...",
@@ -140,15 +140,15 @@ class DisplayPopulation extends StatelessWidget {
                 Row(
                   children: [
                     TextButton(
-                      child: Text("Cancel"),
+                      child: const Text("Cancel"),
                       onPressed: () {
                         Navigator.of(context).pop();
                       },
                     ),
                     TextButton(
                       child: method == "Increase"
-                          ? Text("Increase")
-                          : Text("Decrease"),
+                          ? const Text("Increase")
+                          : const Text("Decrease"),
                       onPressed: () {
                         method == "Increase"
                             ? contractLink.increasePopulation(

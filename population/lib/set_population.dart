@@ -5,6 +5,8 @@ import 'package:population/contract_linking.dart';
 import 'package:provider/provider.dart';
 
 class SetPopulation extends StatefulWidget {
+  const SetPopulation({Key? key}) : super(key: key);
+
   @override
   _SetPopulationState createState() => _SetPopulationState();
 }
@@ -22,18 +24,18 @@ class _SetPopulationState extends State<SetPopulation> {
 
     return Scaffold(
         appBar: AppBar(
-          title: Text("Set Population"),
+          title: const Text("Set Population"),
           actions: [
             TextButton(
                 onPressed: () {
-                  contractLink.addData(countryNameController.text,
+                  contractLink.setData(countryNameController.text,
                       BigInt.from(int.parse(populationController.text)));
                   Navigator.pop(context);
                 },
-                child: Text(
+                child: const Text(
                   "SAVE",
                   style: TextStyle(
-                      color: Colors.brown, fontWeight: FontWeight.bold),
+                      color: Colors.blue, fontWeight: FontWeight.bold),
                 ))
           ],
         ),
@@ -55,8 +57,8 @@ class _SetPopulationState extends State<SetPopulation> {
     return Stack(
       children: [
         Padding(
-          padding: EdgeInsets.only(bottom: 8.0, left: 54),
-          child: Container(
+          padding: const EdgeInsets.only(bottom: 8.0, left: 54),
+          child: SizedBox(
             height: 120,
             child: Card(
               color: Colors.cyan,
@@ -79,12 +81,12 @@ class _SetPopulationState extends State<SetPopulation> {
       child: Container(
         width: 100,
         height: 100,
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           shape: BoxShape.circle,
         ),
         child: CircleAvatar(
             backgroundColor: Colors.blueGrey,
-            child: Container(
+            child: SizedBox(
                 width: 80,
                 height: 50,
                 child:
@@ -109,13 +111,13 @@ class _SetPopulationState extends State<SetPopulation> {
       itemBuilder: (Country country) {
         return Row(
           children: <Widget>[
-            SizedBox(width: 48.0),
+            const SizedBox(width: 48.0),
             CountryPickerUtils.getDefaultFlagImage(country),
-            SizedBox(width: 8.0),
+            const SizedBox(width: 8.0),
             Expanded(
                 child: Text(
               country.name,
-              style: TextStyle(
+              style: const TextStyle(
                   color: Colors.brown,
                   fontSize: 25,
                   fontWeight: FontWeight.bold),
@@ -123,7 +125,7 @@ class _SetPopulationState extends State<SetPopulation> {
           ],
         );
       },
-      icon: Icon(
+      icon: const Icon(
         Icons.arrow_downward,
         color: Colors.white,
         size: 50,
@@ -135,9 +137,9 @@ class _SetPopulationState extends State<SetPopulation> {
 
   Widget populationTextfield() {
     return Padding(
-      padding: EdgeInsets.only(left: 48.0, right: 5),
+      padding: const EdgeInsets.only(left: 48.0, right: 5),
       child: TextField(
-        decoration: InputDecoration(
+        decoration: const InputDecoration(
             filled: true,
             fillColor: Colors.black,
             focusedBorder: OutlineInputBorder(),
