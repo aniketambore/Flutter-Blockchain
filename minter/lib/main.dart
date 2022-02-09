@@ -1,25 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:minter/contract_linking.dart';
-import 'package:minter/minterUI.dart';
+import 'package:minter/minter_ui.dart';
 import 'package:provider/provider.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
+  const MyApp({Key? key}) : super(key: key);
+
+  ThemeData _buildAppTheme() {
+    final ThemeData base = ThemeData.dark();
+    return base.copyWith(
+        brightness: Brightness.dark,
+        textTheme: const TextTheme(
+          headline1: TextStyle(fontSize: 72, fontWeight: FontWeight.bold),
+        ));
+  }
+
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider<ContractLinking>(
+    return ChangeNotifierProvider(
       create: (_) => ContractLinking(),
       child: MaterialApp(
-          title: 'Flutter Demo',
-          theme: ThemeData(
-              brightness: Brightness.dark,
-              primaryColor: Colors.cyan[400],
-              accentColor: Colors.deepOrange[200]),
-          home: MinterUI()),
+          title: 'Minter Dapp',
+          theme: _buildAppTheme(),
+          home: const MinterUI()),
     );
   }
 }

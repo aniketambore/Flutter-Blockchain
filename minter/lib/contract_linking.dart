@@ -1,56 +1,57 @@
 import 'dart:convert';
 
+import 'package:dart_web3/dart_web3.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart';
-import 'package:web3dart/web3dart.dart';
 import 'package:web_socket_channel/io.dart';
 
 class ContractLinking extends ChangeNotifier {
   final String _rpcUrl = "http://10.0.2.2:7545";
   final String _wsUrl = "ws://10.0.2.2:7545/";
   final String _privateKey =
-      "7ebf66311ac8185812d28a222e376e6d11fa678b09b882480110f40e1a2aff45";
-  Web3Client _client;
+      "969aefe94e55a57588a3ff7d44c586e4c462205b6d6130e20a46186774bfdfa1";
 
-  String _abiCode;
+  late Web3Client _client;
+  late String _abiCode;
+  late EthereumAddress _contractAddress;
+  late Credentials _credentials;
 
-  EthereumAddress _contractAddress;
-  Credentials _credentials;
-
-  DeployedContract _contract;
-  ContractFunction _minterAddr;
-  ContractFunction _balanceGet;
-  ContractFunction _mintFunc;
-  ContractFunction _sendFunc;
-  ContractEvent _sentEvent;
+  late DeployedContract _contract;
+  late ContractFunction _minterAddr;
+  late ContractFunction _balanceGet;
+  late ContractFunction _mintFunc;
+  late ContractFunction _sendFunc;
+  late ContractEvent _sentEvent;
   bool isLoading = true;
 
-  String minterAddress;
+  late String minterAddress;
 
   ContractLinking() {
-    initialSetup();
+    initialSetUp();
   }
 
-  Future<void> initialSetup() async {
+  initialSetUp() async {
     _client = Web3Client(_rpcUrl, Client(), socketConnector: () {
       return IOWebSocketChannel.connect(_wsUrl).cast<String>();
     });
     await getAbi();
-    await getCredentials();
+    getCredentials();
     await getDeployedContract();
   }
 
   Future<void> getAbi() async {
-    String abiStringFile = await rootBundle.loadString("src/abis/Minter.json");
+    String abiStringFile =
+        await rootBundle.loadString("src/artifacts/Minter.json");
     var jsonAbi = jsonDecode(abiStringFile);
     _abiCode = jsonEncode(jsonAbi["abi"]);
+    // print(_abiCode);
     _contractAddress =
         EthereumAddress.fromHex(jsonAbi["networks"]["5777"]["address"]);
   }
 
-  Future<void> getCredentials() async {
-    _credentials = await _client.credentialsFromPrivateKey(_privateKey);
+  void getCredentials() {
+    _credentials = EthPrivateKey.fromHex(_privateKey);
   }
 
   Future<void> getDeployedContract() async {
@@ -68,7 +69,7 @@ class ContractLinking extends ChangeNotifier {
     final _minterAddress = await _client
         .call(contract: _contract, function: _minterAddr, params: []);
     minterAddress = "${_minterAddress.first}";
-    print(minterAddress);
+    // print("Minter Addresss is $minterAddress");
     isLoading = false;
     notifyListeners();
   }
@@ -78,7 +79,7 @@ class ContractLinking extends ChangeNotifier {
         contract: _contract,
         function: _balanceGet,
         params: [EthereumAddress.fromHex(addr)]);
-    //print("$_balance");
+    // print("$_balance");
     isLoading = false;
     notifyListeners();
     return "${_balance.first}";
@@ -88,15 +89,17 @@ class ContractLinking extends ChangeNotifier {
     isLoading = true;
     notifyListeners();
     await _client.sendTransaction(
-        _credentials,
-        Transaction.callContract(
-            contract: _contract,
-            function: _mintFunc,
-            parameters: [
-              EthereumAddress.fromHex(receiver),
-              BigInt.from(amount)
-            ]));
-    print("Coins $amount minted to $receiver");
+      _credentials,
+      Transaction.callContract(
+        contract: _contract,
+        function: _mintFunc,
+        parameters: [EthereumAddress.fromHex(receiver), BigInt.from(amount)],
+        // gasPrice: EtherAmount.inWei(BigInt.one),
+        // maxGas: 100000,
+        // value: EtherAmount.fromUnitAndValue(EtherUnit.ether, 1),
+      ),
+    );
+    // print("Coins $amount minted to $receiver");
     getMinterAddr();
   }
 
@@ -109,13 +112,13 @@ class ContractLinking extends ChangeNotifier {
         .events(FilterOptions.events(contract: _contract, event: _sentEvent))
         .take(1)
         .listen((event) {
-      final decoded = _sentEvent.decodeResults(event.topics, event.data);
+      final decoded = _sentEvent.decodeResults(event.topics!, event.data!);
 
       final from = decoded[0] as EthereumAddress;
       final to = decoded[1] as EthereumAddress;
       final value = decoded[2] as BigInt;
 
-      print('$from sent $value Coins to $to');
+      // print('$from sent $value Coins to $to');
     });
 
     await _client.sendTransaction(

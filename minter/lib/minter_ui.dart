@@ -4,23 +4,35 @@ import 'package:minter/contract_linking.dart';
 import 'package:provider/provider.dart';
 
 class MinterUI extends StatelessWidget {
+  const MinterUI({Key? key}) : super(key: key);
+
+  showToast(String message, BuildContext context) {
+    Fluttertoast.showToast(
+      msg: message,
+      backgroundColor: Theme.of(context).accentColor,
+      toastLength: Toast.LENGTH_SHORT,
+      gravity: ToastGravity.TOP,
+      textColor: Colors.black,
+      fontSize: 20,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     var contractLink = Provider.of<ContractLinking>(context);
-
     return Scaffold(
       appBar: AppBar(
-        title: Text("Minter"),
+        title: const Text("Minter"),
         centerTitle: true,
       ),
       body: Container(
         child: Center(
           child: contractLink.isLoading
-              ? CircularProgressIndicator()
+              ? const CircularProgressIndicator()
               : SingleChildScrollView(
                   child: Column(
                     children: [
-                      Container(
+                      const SizedBox(
                         width: 300,
                         height: 350,
                         child: Image(
@@ -30,24 +42,24 @@ class MinterUI extends StatelessWidget {
                       ),
                       Text(
                         "Minter is ${contractLink.minterAddress.substring(0, 11)}XXXX",
-                        style: TextStyle(
+                        style: const TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
                             color: Colors.cyan),
                       ),
                       Padding(
-                        padding: EdgeInsets.only(top: 8.0),
-                        child: Container(
+                        padding: const EdgeInsets.only(top: 8.0),
+                        child: SizedBox(
                           width: 350,
                           height: 50,
                           child: ElevatedButton.icon(
                             style: ElevatedButton.styleFrom(
                                 primary: Colors.orangeAccent.withOpacity(0.9)),
-                            icon: Icon(
+                            icon: const Icon(
                               Icons.account_balance_wallet,
                               color: Colors.black,
                             ),
-                            label: Text("Check Balance"),
+                            label: const Text("Check Balance"),
                             onPressed: () {
                               balanceDialog(context);
                             },
@@ -55,18 +67,18 @@ class MinterUI extends StatelessWidget {
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsets.only(top: 8.0),
-                        child: Container(
+                        padding: const EdgeInsets.only(top: 8.0),
+                        child: SizedBox(
                           width: 350,
                           height: 50,
                           child: ElevatedButton.icon(
                             style: ElevatedButton.styleFrom(
                                 primary: Colors.orangeAccent.withOpacity(0.9)),
-                            icon: Icon(
+                            icon: const Icon(
                               Icons.money,
                               color: Colors.black,
                             ),
-                            label: Text("Mint Coins"),
+                            label: const Text("Mint Coins"),
                             onPressed: () {
                               mintCoinDialog(context);
                             },
@@ -74,18 +86,18 @@ class MinterUI extends StatelessWidget {
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsets.only(top: 8.0),
-                        child: Container(
+                        padding: const EdgeInsets.only(top: 8.0),
+                        child: SizedBox(
                           width: 350,
                           height: 50,
                           child: ElevatedButton.icon(
                             style: ElevatedButton.styleFrom(
                                 primary: Colors.orangeAccent.withOpacity(0.9)),
-                            icon: Icon(
+                            icon: const Icon(
                               Icons.offline_share,
                               color: Colors.black,
                             ),
-                            label: Text("Send Coins"),
+                            label: const Text("Send Coins"),
                             onPressed: () {
                               sendCoinDialog(context);
                             },
@@ -110,12 +122,12 @@ class MinterUI extends StatelessWidget {
             content: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Text(
+                const Text(
                   "Check Balance",
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
                 ),
                 Padding(
-                  padding: EdgeInsets.all(18.0),
+                  padding: const EdgeInsets.all(18.0),
                   child: TextField(
                     controller: accountAddr,
                     decoration: InputDecoration(
@@ -133,9 +145,9 @@ class MinterUI extends StatelessWidget {
                         onPressed: () {
                           Navigator.pop(context);
                         },
-                        child: Text("Cancel")),
+                        child: const Text("Cancel")),
                     Padding(
-                      padding: EdgeInsets.only(left: 8.0),
+                      padding: const EdgeInsets.only(left: 8.0),
                       child: ElevatedButton(
                           onPressed: () async {
                             String balance =
@@ -146,7 +158,7 @@ class MinterUI extends StatelessWidget {
                                 context);
                             //Navigator.pop(context);
                           },
-                          child: Text("Balance")),
+                          child: const Text("Balance")),
                     )
                   ],
                 )
@@ -167,12 +179,12 @@ class MinterUI extends StatelessWidget {
             content: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Text(
+                const Text(
                   "Mint Coins",
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(top: 18.0, bottom: 8.0),
+                  padding: const EdgeInsets.only(top: 18.0, bottom: 8.0),
                   child: TextField(
                     controller: accountAddr,
                     decoration: InputDecoration(
@@ -183,7 +195,7 @@ class MinterUI extends StatelessWidget {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(bottom: 8.0),
+                  padding: const EdgeInsets.only(bottom: 8.0),
                   child: TextField(
                     controller: coinsAmount,
                     decoration: InputDecoration(
@@ -202,9 +214,9 @@ class MinterUI extends StatelessWidget {
                         onPressed: () {
                           Navigator.pop(context);
                         },
-                        child: Text("Cancel")),
+                        child: const Text("Cancel")),
                     Padding(
-                      padding: EdgeInsets.only(left: 8.0),
+                      padding: const EdgeInsets.only(left: 8.0),
                       child: ElevatedButton(
                           onPressed: () {
                             contractLink.mintCoins(
@@ -214,7 +226,7 @@ class MinterUI extends StatelessWidget {
                                 context);
                             Navigator.pop(context);
                           },
-                          child: Text("Mint")),
+                          child: const Text("Mint")),
                     )
                   ],
                 )
@@ -237,12 +249,12 @@ class MinterUI extends StatelessWidget {
             content: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Text(
+                const Text(
                   "Send Coins",
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(top: 18.0, bottom: 8.0),
+                  padding: const EdgeInsets.only(top: 18.0, bottom: 8.0),
                   child: TextField(
                     controller: senderAddr,
                     decoration: InputDecoration(
@@ -253,7 +265,7 @@ class MinterUI extends StatelessWidget {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(bottom: 8.0),
+                  padding: const EdgeInsets.only(bottom: 8.0),
                   child: TextField(
                     controller: receiverAddr,
                     decoration: InputDecoration(
@@ -264,7 +276,7 @@ class MinterUI extends StatelessWidget {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(bottom: 8.0),
+                  padding: const EdgeInsets.only(bottom: 8.0),
                   child: TextField(
                     controller: coinsAmount,
                     decoration: InputDecoration(
@@ -283,9 +295,9 @@ class MinterUI extends StatelessWidget {
                         onPressed: () {
                           Navigator.pop(context);
                         },
-                        child: Text("Cancel")),
+                        child: const Text("Cancel")),
                     Padding(
-                      padding: EdgeInsets.only(left: 8.0),
+                      padding: const EdgeInsets.only(left: 8.0),
                       child: ElevatedButton(
                           onPressed: () {
                             contractLink.sendCoins(senderAddr.text,
@@ -295,7 +307,7 @@ class MinterUI extends StatelessWidget {
                                 context);
                             Navigator.pop(context);
                           },
-                          child: Text("Send")),
+                          child: const Text("Send")),
                     )
                   ],
                 )
@@ -303,16 +315,5 @@ class MinterUI extends StatelessWidget {
             ),
           );
         });
-  }
-
-  showToast(String message, BuildContext context) {
-    Fluttertoast.showToast(
-      msg: message,
-      backgroundColor: Theme.of(context).accentColor,
-      toastLength: Toast.LENGTH_SHORT,
-      gravity: ToastGravity.TOP,
-      textColor: Colors.black,
-      fontSize: 20,
-    );
   }
 }
