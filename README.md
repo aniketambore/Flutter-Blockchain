@@ -1,5 +1,5 @@
 <div align="center">
-    <img src="https://q-sols.com/wp-content/uploads/2018/05/blockchain-development-services.png?raw=true" width="100px" alt="Blockchain Logo"/>
+    <img src="https://i.ibb.co/9ZhjNCj/icons8-module-96.png?raw=true" width="100px" alt="Blockchain Logo"/>
 </div>
 
 <h3 align="center">This project is meant for those with a basic knowledge of Ethereum and smart contracts, who have some knowledge of the Flutter framework but are new to mobile dapps.</h3>
