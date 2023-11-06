@@ -1,15 +1,15 @@
 // SPDX-License-Identifier: MIT
-pragma solidity >=0.4.16 <0.9.0 ;
+
+pragma solidity ^0.8.7;
 
 contract HelloWorld {
-    string public yourName ;
+    string public yourName;
 
-    constructor(){
-        yourName = "Unknown" ;
+    constructor() {
+        yourName = "Unknown";
     }
 
-    function setName(string memory name) public {
-        yourName = name;
+    function setName(string memory nm) public{
+		yourName = nm;
     }
-
 }

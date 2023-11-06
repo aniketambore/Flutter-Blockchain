@@ -1,21 +1,20 @@
 name: hello_world
 description: A new Flutter project.
-
 publish_to: 'none'
-
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.15.1 <3.0.0"
+  sdk: ">=2.16.2 <3.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.2
   provider: ^6.0.2
+  web3dart: ^2.3.5
   http: ^0.13.4
-  web_socket_channel: ^2.1.0
-  dart_web3: ^0.0.3
+  very_good_analysis: ^2.4.0
+  web_socket_channel: ^2.2.0
 
 dev_dependencies:
   flutter_test:
@@ -24,5 +23,19 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+
+  # To add assets to your application, add an assets section, like this:
   assets:
     - src/artifacts/HelloWorld.json
+
+  # fonts:
+  #   - family: Schyler
+  #     fonts:
+  #       - asset: fonts/Schyler-Regular.ttf
+  #       - asset: fonts/Schyler-Italic.ttf
+  #         style: italic
+  #   - family: Trajan Pro
+  #     fonts:
+  #       - asset: fonts/TrajanPro.ttf
+  #       - asset: fonts/TrajanPro_Bold.ttf
+  #         weight: 700
